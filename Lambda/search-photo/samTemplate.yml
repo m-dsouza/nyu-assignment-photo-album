@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Lambda function for photo album
+Resources:
+  searchPhoto:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Runtime: nodejs12.x
+      Role: arn:aws:iam::130260562295:role/service-role/UserRole
+      Handler: index.handler
+      CodeUri: ./
+      Description: Invoke a function during stack creation.
+      Tracing: Active
+      Events:
+        getAzApi:
+            Type: Api
+            Properties:
+                Path: /getazs
+                Method: get
