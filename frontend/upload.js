@@ -11,7 +11,7 @@ const icon = document.querySelector('i.fa.fa-microphone')
     const speechToText = event.results[0][0].transcript;
     console.log(speechToText)
 
-    var apigClient = apigClientFactory.newClient({ apiKey: "apikey" });
+    var apigClient = apigClientFactory.newClient({ apiKey: "Sd26QCMkkUamVeRvRN9wV72SDrxOM9XPLvc0ntAa" });
     var params = {
       "q": speechToText
     };
@@ -74,9 +74,8 @@ const icon = document.querySelector('i.fa.fa-microphone')
 
 function searchPhoto() {
 
-  var apigClient = apigClientFactory.newClient({
-  });
-
+  var apigClient = apigClientFactory.newClient({ apiKey: "Sd26QCMkkUamVeRvRN9wV72SDrxOM9XPLvc0ntAa" });
+//apiKey: "Sd26QCMkkUamVeRvRN9wV72SDrxOM9XPLvc0ntAa"
   var image_message = document.getElementById("note-textarea").value;
   if(image_message == "")
     var image_message = document.getElementById("transcript").value;
@@ -160,7 +159,8 @@ function uploadPhoto() {
       console.log(data)
       var apigClient = apigClientFactory.newClient({
         defaultContentType: "image/jpeg",
-        defaultAcceptType: "image/jpeg"
+        defaultAcceptType: "image/jpeg",
+		apiKey: "Sd26QCMkkUamVeRvRN9wV72SDrxOM9XPLvc0ntAa"
       });
 
       // var data = document.getElementById('file_path').value;
@@ -172,7 +172,8 @@ function uploadPhoto() {
       var body = file;
       var params = {
         "item": file.name,
-        "folder": "nyu-photo-album-bucket2"
+        "folder": "nyu-photo-album-bucket2",
+		 "x-amz-meta-customLabels": 'test',
       };
 
       var additionalParams = {
