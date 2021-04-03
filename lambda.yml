@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lambda function for photo album
+Resources:
+  Lambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: search-photos
+      Runtime: nodejs12.x
+      Role: arn:aws:iam::130260562295:role/service-role/UserRole
+      Handler: index.handler
+      Code:
+        S3Bucket: photoalbum-lambda-pipeline
+        S3Key : !Sub index.zip
+      Description: Invoke a function during stack creation.
+      TracingConfig:
+        Mode: Active
