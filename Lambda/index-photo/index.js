@@ -8,7 +8,7 @@ var region = 'us-west-2';
 var domain = 'search-photos-lgukomkbmiehedsl7mwdpyhgqi.us-west-2.es.amazonaws.com'; 
 var index = 'photos';
 var type = 'Photo';
-
+var s3 = new AWS.S3();
 AWS.config.update({region: 'us-west-2'});
 
 const client = new AWS.Rekognition();
@@ -29,6 +29,19 @@ const params = {
   },
   MaxLabels: 5
 };
+
+
+var params1 = {
+  Bucket: bucket,
+  Key : uploadedPhoto
+};
+s3.headObject(params1, function(err, data) {
+   if (err) console.log(err, err.stack); // an error occurred
+   else     console.log("Example",data);           // successful response
+ });
+
+
+
 console.log(params);
  try{ 
 client.detectLabels(params).promise().then(function(returnValue) {
@@ -37,6 +50,9 @@ client.detectLabels(params).promise().then(function(returnValue) {
     returnValue.Labels.forEach(record => {
        labels.push(record.Name);
     });
+    
+    
+ 
 elasticObject= {
     "objectKey": uploadedPhoto, 
     "bucket": bucket,
@@ -49,7 +65,19 @@ elasticObject= {
 catch (error){
        console.log(error);
    }
-return elasticObject;
+   
+   
+   
+      
+    const response = {
+             headers: {
+            'Access-Control-Allow-Origin': '*',
+            "Content-Type":"application/json"
+             },
+            statusCode: 200,
+            body: elasticObject
+        };
+return response;
 };
 
 
