@@ -1,5 +1,6 @@
 # nyu-assignment-photo-album
-Summary
+
+# Summary
 The smart photo album is a AWS based serverless cloud application that allows users to upload photos and then search them using voice or text.
 
 -Users use the frontend up upload images into a S3 Bucket, and provide search queries based on image chracteristics.
